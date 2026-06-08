@@ -1,0 +1,27 @@
+# 构建输出
+[Bb]in/
+[Oo]bj/
+
+# Visual Studio 临时文件
+.vs/
+*.suo
+*.userosscache
+*.sln.docstates
+
+# 用户特定的项目文件
+*.csproj.user
+*.user
+
+# NuGet
+packages/
+*.nupkg
+
+# 日志文件
+*.log
+
+# 临时文件
+*.tmp
+*.temp
+
+# 编译产物 DLL 已在 bin/ 下被忽略，但保留目录结构
+# 如需提交 DLL 请移除 [Bb]in/ 行
