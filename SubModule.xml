@@ -9,6 +9,7 @@
     <DependedModule Id="SandBoxCore"/>
     <DependedModule Id="Sandbox"/>
     <DependedModule Id="StoryMode"/>
+    <DependedModule Id="StartAsAnyone"/>
     <DependedModule Id="LivingWorldNpcs"/>
   </DependedModules>
   <SubModules>
