@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Module>
+  <Name value="Taikou Content Pack"/>
+  <Id value="TaikouContent"/>
+  <Version value="v1.0.0"/>
+  <SingleplayerModule value="true"/>
+  <DependedModules>
+    <DependedModule Id="Native"/>
+    <DependedModule Id="SandBoxCore"/>
+    <DependedModule Id="Sandbox"/>
+    <DependedModule Id="StoryMode"/>
+    <DependedModule Id="LivingWorldNpcs"/>
+  </DependedModules>
+  <SubModules>
+    <SubModule>
+      <Name value="TaikouContent"/>
+      <DLLName value="TaikouContent.dll"/>
+      <SubModuleClassType value="TaikouContent.MySubModule"/>
+    </SubModule>
+  </SubModules>
+  <Xmls>
+    <XmlNode>
+      <XmlName id="SPCultures" path="Shokuho/spcultures"/>
+      <IncludedGameTypes>
+        <GameType value="ShokuhoCampaign"/>
+      </IncludedGameTypes>
+    </XmlNode>
+    <XmlNode>
+      <XmlName id="Settlements" path="Patches/UpdateSettlementsOwner"/>
+      <IncludedGameTypes>
+        <GameType value="ShokuhoCampaign"/>
+      </IncludedGameTypes>
+    </XmlNode>
+    <XmlNode>
+      <XmlName id="Factions" path="Shokuho/clans"/>
+      <IncludedGameTypes>
+        <GameType value="ShokuhoCampaign"/>
+      </IncludedGameTypes>
+    </XmlNode>
+    <XmlNode>
+      <XmlName id="Kingdoms" path="Shokuho/spkingdoms"/>
+      <IncludedGameTypes>
+        <GameType value="ShokuhoCampaign"/>
+      </IncludedGameTypes>
+    </XmlNode>
+    <XmlNode>
+      <XmlName id="NPCCharacters" path="Shokuho/lords"/>
+      <IncludedGameTypes>
+        <GameType value="ShokuhoCampaign"/>
+      </IncludedGameTypes>
+    </XmlNode>
+    <XmlNode>
+      <XmlName id="Heroes" path="Shokuho/heroes"/>
+      <IncludedGameTypes>
+        <GameType value="ShokuhoCampaign"/>
+      </IncludedGameTypes>
+    </XmlNode>
+    <XmlNode>
+      <XmlName id="Items" path="Shokuho/my_helmets"/>
+      <IncludedGameTypes>
+        <GameType value="ShokuhoCampaign"/>
+      </IncludedGameTypes>
+    </XmlNode>
+  </Xmls>
+</Module>
