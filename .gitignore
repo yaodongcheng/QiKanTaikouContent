@@ -1,27 +1,12 @@
-# 构建中间文件
-[Oo]bj/
+# 编译产物
+bin/
+obj/
 
-# Visual Studio 临时文件
-.vs/
-*.suo
-*.userosscache
-*.sln.docstates
-
-# 用户特定的项目文件
-*.csproj.user
+# VS / Rider
 *.user
+*.suo
+.vs/
+.idea/
 
-# NuGet
-packages/
-*.nupkg
-
-# 日志文件
+# 游戏运行日志（若产生）
 *.log
-
-# 临时文件
-*.tmp
-*.temp
-
-# 编译产物 DLL 提交到版本管理（内容包 DLL 体积小且无独立 VS 工程时推荐）
-# 如需忽略，取消下面一行的注释：
-# [Bb]in/

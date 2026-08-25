@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{5F3A9E21-C8B4-4D62-9A1E-77B2D0C4F8A1}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>ShokuhoTaikouExpansionPack</RootNamespace>
+    <AssemblyName>ShokuhoTaikouExpansionPack</AssemblyName>
+    <TargetFrameworkVersion>v4.7.2</TargetFrameworkVersion>
+    <LangVersion>12.0</LangVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
+  </PropertyGroup>
+  <!-- ── DLL 引用路径（每台电脑用自己游戏目录下的 DLL；MB2_PATH 环境变量，注册表为准）── -->
+  <PropertyGroup>
+    <MB2_CORE_REF>$(MB2_PATH)\bin\Win64_Shipping_Client</MB2_CORE_REF>
+    <MB2_SANDBOX_REF>$(MB2_PATH)\Modules\SandBox\bin\Win64_Shipping_Client</MB2_SANDBOX_REF>
+    <MB2_NATIVE_REF>$(MB2_PATH)\Modules\Native\bin\Win64_Shipping_Client</MB2_NATIVE_REF>
+  </PropertyGroup>
+  <!-- ── 版本检测 + 累积阈值宏（与 LivingWorldNpcs 主仓库同一套，见其 csproj 注释）── -->
+  <PropertyGroup>
+    <MB2_VersionFile>$(MB2_PATH)\bin\Win64_Shipping_Client\Version.xml</MB2_VersionFile>
+    <MB2_VersionFileContent Condition="Exists('$(MB2_VersionFile)')">$([System.IO.File]::ReadAllText('$(MB2_VersionFile)'))</MB2_VersionFileContent>
+    <MB2_IsV12x Condition="$(MB2_VersionFileContent.Contains('v1.2.'))">true</MB2_IsV12x>
+    <MB2_IsV13x Condition="$(MB2_VersionFileContent.Contains('v1.3.'))">true</MB2_IsV13x>
+    <MB2_IsV14x Condition="$(MB2_VersionFileContent.Contains('v1.4.'))">true</MB2_IsV14x>
+    <MB2_IsV15x Condition="$(MB2_VersionFileContent.Contains('v1.5.'))">true</MB2_IsV15x>
+  </PropertyGroup>
+  <!-- 公共版本宏（Debug / Release 共享） -->
+  <PropertyGroup>
+    <MB2_VersionDefines>
+    </MB2_VersionDefines>
+    <MB2_VersionDefines Condition="$(MB2_VersionFileContent.Contains('v1.2.12'))">$(MB2_VersionDefines);MB2_V1212</MB2_VersionDefines>
+    <MB2_VersionDefines Condition="'$(MB2_IsV13x)' == 'true' Or '$(MB2_IsV14x)' == 'true' Or '$(MB2_IsV15x)' == 'true'">$(MB2_VersionDefines);MB2_GE_130</MB2_VersionDefines>
+    <MB2_VersionDefines Condition="'$(MB2_IsV14x)' == 'true' Or '$(MB2_IsV15x)' == 'true'">$(MB2_VersionDefines);MB2_GE_140</MB2_VersionDefines>
+    <MB2_VersionDefines Condition="'$(MB2_IsV15x)' == 'true'">$(MB2_VersionDefines);MB2_GE_150</MB2_VersionDefines>
+  </PropertyGroup>
+  <!-- Debug：自动检测 -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>$(MB2_PATH)\Modules\ShokuhoTaikouExpansionPack\bin\Win64_Shipping_Client\</OutputPath>
+    <DefineConstants>DEBUG;TRACE;$(MB2_VersionDefines)</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>3</WarningLevel>
+    <PlatformTarget>x64</PlatformTarget>
+  </PropertyGroup>
+  <!-- Release：同上，去掉 DEBUG -->
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE;$(MB2_VersionDefines)</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <!-- Harmony 双路径兜底：优先 Steam workshop（2859188632），workshop 未装则回落本地 Modules\Bannerlord.Harmony（同主仓库） -->
+    <Reference Include="0Harmony" Condition="Exists('$(MB2_PATH_STEAMWORKSHOP)\2859188632\bin\Win64_Shipping_Client\0Harmony.dll')">
+      <HintPath>$(MB2_PATH_STEAMWORKSHOP)\2859188632\bin\Win64_Shipping_Client\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="0Harmony" Condition="!Exists('$(MB2_PATH_STEAMWORKSHOP)\2859188632\bin\Win64_Shipping_Client\0Harmony.dll')">
+      <HintPath>$(MB2_PATH)\Modules\Bannerlord.Harmony\bin\Win64_Shipping_Client\0Harmony.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <!-- 🔴 LivingWorldNpcs 引擎引用【骨架阶段暂不引用】——
+         只要 AssemblyRef 存在，本 DLL 加载时 AssemblyLoader 引用循环就会在游戏 bin 找
+         LivingWorldNpcs.dll（不在那里）→ 与织丰同样的 dependency conflict 报错。
+         实施阶段（plan 07 审核后）按实测决定：
+         a) 兼容层与剧本层拆两个 DLL（兼容层零 LWN 引用先加载打补丁，剧本层后加载引 LWN）
+         b) 或验证 LWN 正常加载的机制后引用
+         详见 plan 07「行为注册机制」与「待真机验证」 -->
+    <!-- Newtonsoft.Json：游戏自带 DLL，禁止 NuGet（同主仓库铁律） -->
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>$(MB2_CORE_REF)\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="SandBox">
+      <HintPath>$(MB2_SANDBOX_REF)\SandBox.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Numerics.Vectors, Version=4.1.3.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <HintPath>$(MB2_CORE_REF)\System.Numerics.Vectors.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
+    <Reference Include="TaleWorlds.CampaignSystem">
+      <HintPath>$(MB2_CORE_REF)\TaleWorlds.CampaignSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.Core">
+      <HintPath>$(MB2_CORE_REF)\TaleWorlds.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.Library">
+      <HintPath>$(MB2_CORE_REF)\TaleWorlds.Library.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.Localization">
+      <HintPath>$(MB2_CORE_REF)\TaleWorlds.Localization.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.ModuleManager">
+      <HintPath>$(MB2_CORE_REF)\TaleWorlds.ModuleManager.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.MountAndBlade">
+      <HintPath>$(MB2_CORE_REF)\TaleWorlds.MountAndBlade.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="TaleWorlds.ObjectSystem">
+      <HintPath>$(MB2_CORE_REF)\TaleWorlds.ObjectSystem.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="MySubModule.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,66 +1,41 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Module>
-  <Name value="Taikou Content Pack"/>
-  <Id value="TaikouContent"/>
+  <Name value="Shokuho Taikou Expansion Pack"/>
+  <Id value="ShokuhoTaikouExpansionPack"/>
   <Version value="v1.0.0"/>
-  <SingleplayerModule value="true"/>
+  <SinglePlayerModule value="true"/>
+  <Official value="false"/>
+  <ModuleCategory value="Singleplayer"/>
   <DependedModules>
     <DependedModule Id="Native"/>
     <DependedModule Id="SandBoxCore"/>
     <DependedModule Id="Sandbox"/>
     <DependedModule Id="StoryMode"/>
-    <DependedModule Id="StartAsAnyone"/>
+    <!-- 织丰前置：本包是织丰的补充（剧本层），玩家必须装织丰；织丰在前加载（剧本层入口共存需在其后注册） -->
+    <DependedModule Id="Shokuho"/>
     <DependedModule Id="LivingWorldNpcs"/>
+    <!-- 06 扮演历史人物依赖 -->
+    <DependedModule Id="StartAsAnyone"/>
   </DependedModules>
+  <!-- 启动器专用顺序声明（游戏内加载器不解析此节点，但保留兼容启动器） -->
+  <DependedModuleMetadatas>
+    <DependedModuleMetadata id="Shokuho" order="LoadBeforeThis"/>
+    <DependedModuleMetadata id="LivingWorldNpcs" order="LoadBeforeThis"/>
+  </DependedModuleMetadatas>
+  <!-- 兼容层已删除（2026-08-25）：排序声明回到剧本层定位——织丰由 DependedModules 约束在前，
+       剧本层在其后加载实现入口共存（plan 07 部件 4）；无 ModulesToLoadAfterThis。
+       兼容层曾经的"织丰在后"声明（ModulesToLoadAfterThis）与剧本层需求相反，一并移除。 -->
   <SubModules>
     <SubModule>
-      <Name value="TaikouContent"/>
-      <DLLName value="TaikouContent.dll"/>
-      <SubModuleClassType value="TaikouContent.MySubModule"/>
+      <Name value="ShokuhoTaikouExpansionPack"/>
+      <DLLName value="ShokuhoTaikouExpansionPack.dll"/>
+      <SubModuleClassType value="ShokuhoTaikouExpansionPack.MySubModule"/>
+      <Tags>
+        <Tag key="DedicatedServerType" value="none"/>
+        <Tag key="IsNoRenderModeElement" value="false"/>
+      </Tags>
     </SubModule>
   </SubModules>
-  <Xmls>
-    <XmlNode>
-      <XmlName id="SPCultures" path="Shokuho/spcultures"/>
-      <IncludedGameTypes>
-        <GameType value="ShokuhoCampaign"/>
-      </IncludedGameTypes>
-    </XmlNode>
-    <XmlNode>
-      <XmlName id="Settlements" path="Patches/UpdateSettlementsOwner"/>
-      <IncludedGameTypes>
-        <GameType value="ShokuhoCampaign"/>
-      </IncludedGameTypes>
-    </XmlNode>
-    <XmlNode>
-      <XmlName id="Factions" path="Shokuho/clans"/>
-      <IncludedGameTypes>
-        <GameType value="ShokuhoCampaign"/>
-      </IncludedGameTypes>
-    </XmlNode>
-    <XmlNode>
-      <XmlName id="Kingdoms" path="Shokuho/spkingdoms"/>
-      <IncludedGameTypes>
-        <GameType value="ShokuhoCampaign"/>
-      </IncludedGameTypes>
-    </XmlNode>
-    <XmlNode>
-      <XmlName id="NPCCharacters" path="Shokuho/lords"/>
-      <IncludedGameTypes>
-        <GameType value="ShokuhoCampaign"/>
-      </IncludedGameTypes>
-    </XmlNode>
-    <XmlNode>
-      <XmlName id="Heroes" path="Shokuho/heroes"/>
-      <IncludedGameTypes>
-        <GameType value="ShokuhoCampaign"/>
-      </IncludedGameTypes>
-    </XmlNode>
-    <XmlNode>
-      <XmlName id="Items" path="Shokuho/my_helmets"/>
-      <IncludedGameTypes>
-        <GameType value="ShokuhoCampaign"/>
-      </IncludedGameTypes>
-    </XmlNode>
-  </Xmls>
+  <!-- 数据文件：骨架阶段不注册 Xmls（剧本内容 plan 07/08 审核通过后按需注册；
+       织丰数据由其本体加载，本包零资源搬运） -->
 </Module>

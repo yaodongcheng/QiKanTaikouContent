@@ -1,33 +1,23 @@
-using LivingWorldNpcs;
-using System.IO;
-using TaleWorlds.ModuleManager;
 using TaleWorlds.MountAndBlade;
 
-namespace TaikouContent
+namespace ShokuhoTaikouExpansionPack
 {
+    /// <summary>
+    /// 织丰补充包入口（骨架阶段：空壳，不产生任何行为）。
+    ///
+    /// 定位（plan 07 方案 A）：织丰的剧本层载体，一个包承载：
+    /// 1. 兼容层（07a 曾实施，2026-08-25 删除）：1.5.1 硬不兼容（GetTypes 86 个 API 签名差异）、
+    ///    1.2.12 原生可运行——无使用场景；实现细节见主仓库 plan 07a 证据链实录
+    /// 2. 剧本层（plan 07/01-06 审核通过后）：剧本入口 / 时间覆盖 / 剧本行为注入。
+    ///
+    /// 🔴 实施纪律：剧本工程全部 plan 审核通过前，本类保持空壳。
+    /// </summary>
     public class MySubModule : MBSubModuleBase
     {
         protected override void OnSubModuleLoad()
         {
             base.OnSubModuleLoad();
-
-            // ── 注入日本战国世界观 —— Mod A 的 PromptBuilder 自动生效 ──
-            Settings.Instance.WorldDescription =
-                "骑马与砍杀2织丰Mod塑造的日本战国世界";
-            Settings.Instance.EraDescription =
-                "日本战国时代";
-            Settings.Instance.SpeechStyle =
-                "风格口语化、口吻符合日本战国背景。使用符合时代的大河剧风格口语。多用反问、感叹。";
-            Settings.Instance.WarriorTerms =
-                "使用「在下」、「主公」、「混账」等日本战国武家词汇。";
-            Settings.Instance.FemaleSelfAddress =
-                "如果你是女子，需要有女子的说话风格，如「妾身」。";
-
-            // ── 注入织丰数据表 —— 覆盖 Mod A 初始化时的空表 ──
-            string designDataPath = Path.Combine(
-                ModuleHelper.GetModuleFullPath("TaikouContent"),
-                "ModuleData", "DesignData");
-            GameDatabase.LoadTablesFromPath(designDataPath);
+            // 剧本层实施逻辑待 plan 07 审核通过后写入
         }
     }
 }
