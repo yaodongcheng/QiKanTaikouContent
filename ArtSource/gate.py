@@ -39,6 +39,35 @@ def shoulder_gate(img_path):
     return (sh is not None and sh <= SH_DIFF_MAX), sh
 
 
+def classify(path):
+    """初筛四元组分类 + 异常值标记（2026-08-28：初筛+人目复核纪律，25 张旧图教训）：
+    ① PASS / ② 脸FAIL(身对) / ③ 身FAIL(脸对) / ④ 双FAIL / 测量失败。
+    异常值（None / |肩轴|>0.9（-1.0 钉边）/ |脸−0.030|<0.01 / |肩轴+0.15|<0.05）→ ⚠️ NEED_EYES。
+    闸门阈值为 raw 写实域标定；底稿域数值不适用本门（见 pipeline_params.md §7）。"""
+    fok, fr = face_gate(path)
+    sok, shd = shoulder_gate(path)
+    if fok is None and sok is None:
+        cls = '测量失败'
+    elif fok is None:
+        cls = '测量失败(脸)'
+    elif sok is None:
+        cls = '测量失败(肩)'
+    elif fok and sok:
+        cls = '① PASS'
+    elif fok:
+        cls = '③ 身FAIL(脸对)'
+    elif sok:
+        cls = '② 脸FAIL(身对)'
+    else:
+        cls = '④ 双FAIL'
+    eyes = (fr is None or shd is None
+            or (shd is not None and abs(shd) > 0.9)
+            or (fr is not None and abs(fr - FACE_MIN) < 0.01)
+            or (shd is not None and abs(shd - SH_DIFF_MAX) < 0.05))
+    return {'file': path, 'class': cls, 'face_ok': fok, 'face_rel': fr,
+            'shoulder_ok': sok, 'shoulder_diff': shd, 'need_eyes': eyes}
+
+
 def check(png):
     base = os.path.basename(png)
     root = base[:-4]  # 去掉 .png
