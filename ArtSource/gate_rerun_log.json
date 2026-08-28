@@ -1,0 +1,31 @@
+[
+  {
+    "sid": "lord_1_oda",
+    "name": "织田信长",
+    "age": 31,
+    "identity": "大名",
+    "attempts": [
+      {
+        "attempt": 1,
+        "seed": 2002,
+        "raw": "raw/lord_1_oda_织田信长_R1.jpg",
+        "matte": "matte_rembg/lord_1_oda_织田信长_R1.png",
+        "face_rel": 0.036,
+        "shoulder": 1.09,
+        "pass": true,
+        "sec": 45.0
+      }
+    ],
+    "final": {
+      "attempt": 1,
+      "seed": 2002,
+      "raw": "raw/lord_1_oda_织田信长_R1.jpg",
+      "matte": "matte_rembg/lord_1_oda_织田信长_R1.png",
+      "face_rel": 0.036,
+      "shoulder": 1.09,
+      "pass": true,
+      "sec": 45.0
+    },
+    "status": "PASS"
+  }
+]

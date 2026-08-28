@@ -62,6 +62,26 @@ def place(rgba, out_path):
             'head_ok': None if head_ratio is None else (0.14 <= head_ratio <= 0.34)}
 
 
+def shoulder_ratio(rgba):
+    """肩带比（剪影法，2026-08-28 用户标定 → T1a 正式落位）：
+    上半身（人物包围盒顶 40% 高度带）内，画布中轴左半/右半的 alpha>25 像素比。
+    通过区间 ∈ [1.05, 1.65] = 自然侧身（两面出界=拧巴，换 seed 重跑）。
+    标定样本：阿市 1.10✅ 幸村 1.49✅ 信长 0.73❌ 訚千代 0.95❌ 秀吉 1.93❌。"""
+    a = np.asarray(rgba)[..., 3]
+    ys, xs = np.where(a > 25)
+    if not len(xs):
+        return None
+    top = ys.min()
+    H = int(ys.max() - top + 1)
+    band = a[top: top + int(0.40 * H)]              # 上半身带：包围盒顶 40% 高
+    h, w = band.shape
+    left = int((band[:, :w // 2] > 25).sum())
+    right = int((band[:, w // 2:] > 25).sum())
+    if right == 0:
+        return None
+    return round(left / right, 3)
+
+
 def qc_sheet(pngs, out_path, bg):
     """把成品贴到指定底色上拼成质检长图。"""
     cols = len(pngs)

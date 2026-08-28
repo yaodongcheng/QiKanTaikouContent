@@ -20,13 +20,13 @@ OVERRIDES = {
     'lord_1_kinoshita': {'age': 21, 'gender': '男'},
 }
 
-# R 版 img2img 参考图（TK5 BUSTUP 解包 PNG，底稿只借长相/造型）
+# R 版 img2img 参考图（TK5 BUSTUP 解包 PNG，底稿只借长相/造型；文件名 _朝左/右/正 = 实测脸朝向）
 TK5_REF = {
-    'lord_1_oda': 'refs_koei/_tk5/195_织田信长.png',
-    'lord_1_kinoshita': 'refs_koei/_tk5/517_丰臣秀吉.png',
-    'lord_1_sanada_9': 'refs_koei/_tk5/361_真田幸村.png',
-    'lord_1_azai_1': 'refs_koei/_tk5/1049_阿市.png',
-    'lord_1_bekki_2': 'refs_koei/_tk5/1057_訚千代.png',
+    'lord_1_oda': 'refs_koei/_tk5/195_织田信长_朝左.png',
+    'lord_1_kinoshita': 'refs_koei/_tk5/517_丰臣秀吉_朝左.png',
+    'lord_1_sanada_9': 'refs_koei/_tk5/361_真田幸村_朝左.png',
+    'lord_1_azai_1': 'refs_koei/_tk5/1049_阿市_朝左.png',
+    'lord_1_bekki_2': 'refs_koei/_tk5/1057_訚千代_朝左.png',
 }
 
 def load_heroes(ids):

@@ -25,7 +25,9 @@ def run_face(fm, im):
         return None, None
     lm = r.multi_face_landmarks[0].landmark
     frx = lm[1].x - (lm[33].x + lm[263].x) / 2
-    d = 'RIGHT' if frx > 0.012 else ('LEFT' if frx < -0.012 else 'FRONT')
+    # 2026-08-28 收窄带 ±0.003（原 ±0.012 吞符号：1057 镜像实测 +0.007 微右被判成 FRONT，
+    # 用户肉眼当众指正；弱不对称的镜像会翻转朝向，符号不得丢）
+    d = 'RIGHT' if frx > 0.003 else ('LEFT' if frx < -0.003 else 'FRONT')
     return d, round(frx, 3)
 
 
