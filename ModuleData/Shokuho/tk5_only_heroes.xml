@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 07c 步骤 2 产物（2026-08-28 终版 v3）：桶狭间信长本队三人——Hero 实例（有名个体）。归属 = Faction.clan_oda_1（骑砍 Clan/Faction = 政治集团语义：织田家武士属织田阵营；与原版草寇/雇佣商人各有 clan 同理，非血亲限定）。数值保守（史料只载 1560 在场）；face = 通用脸（待立绘补）。🔴 未注册（等 07c 步骤 5 Xmls 声明）。
+<Heroes>
+    <Hero id="tk5_hattori_koheita" faction="Faction.clan_oda_1" name="{=my_tk5_hattori_koheita}Koheita Hattori" alive="true" is_noble="true" occupation="Lord" gold="5000" age="25" />
+    <Hero id="tk5_mori_shinsuke" faction="Faction.clan_oda_1" name="{=my_tk5_mori_shinsuke}Shinsuke Mori" alive="true" is_noble="true" occupation="Lord" gold="5000" age="24" />
+    <Hero id="tk5_yanada_masatsuna" faction="Faction.clan_oda_1" name="{=my_tk5_yanada_masatsuna}Masatsuna Yanada" alive="true" is_noble="true" occupation="Lord" gold="5000" age="26" />
+</Heroes>

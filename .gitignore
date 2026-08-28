@@ -10,3 +10,24 @@ obj/
 
 # 游戏运行日志（若产生）
 *.log
+
+# ── 立绘/头像生成流水线（见 LivingWorldNpcs/plans/scenario-campaign-mode/附录-角色立绘生成流水线.md）──
+# 图片一律不进 git：AI 原图 / 抠图中间产物 / 预览图 / 最终成品
+# 保留在 git 里的是「怎么生成」而不是「生成了什么」：
+#   ArtSource/*.py        生成脚本 = 唯一事实源（铁律 22，改画风改脚本重跑）
+#   ArtSource/refs_koei/  光荣参考图存档（视觉特征提炼用）—— 2026-08-28 用户裁定：整目录不进 git（图片多，且参考图不随包分发）
+ArtSource/**/*.png
+ArtSource/**/*.jpg
+ArtSource/**/*.jpeg
+ArtSource/**/*.webp
+ArtSource/**/*.bmp
+ArtSource/refs_koei/
+ArtSource/__pycache__/
+ArtSource/trial_log.json
+
+# 本地 API 密钥配置（雷火网关 apikey，禁止进 git；内容见附录「API Key 怎么配」）
+ArtSource/api_config.json
+
+# 成品立绘与头像（1049 人约 350~450 MB，走发布包分发，不进 git）
+GUI/SpriteParts/taikou_portrait_*.png
+GUI/SpriteParts/taikou_avatar_*.png

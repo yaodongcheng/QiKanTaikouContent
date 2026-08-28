@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 07c 步骤 2 产物（2026-08-28 终版 v3）：桶狭间信长本队三人——Hero 实例（有名个体）。归属 = Faction.clan_oda_1（骑砍 Clan/Faction = 政治集团语义：织田家武士属织田阵营；与原版草寇/雇佣商人各有 clan 同理，非血亲限定）。数值保守（史料只载 1560 在场）；face = 通用脸（待立绘补）。🔴 未注册（等 07c 步骤 5 Xmls 声明）。
+<NPCCharacters>
+  <NPCCharacter id="tk5_hattori_koheita" name="{=my_tk5_hattori_koheita}Koheita Hattori" age="25" voice="curt" default_group="Infantry" is_hero="true" culture="Culture.kinai" occupation="Lord" face_mesh_cache="true">
+    <face>
+      <BodyProperties version="4" age="25.00" weight="0.5" build="0.5" key="001944000E0015C609748F687E35431497F60440966FF2B0A006E02F80A5772800C660030C34C625000000000000000000000000000000000000000027900140"/>
+    </face>
+    <Traits>
+      <Trait id="BalancedFightingSkills" value="6"/><Trait id="Commander" value="12"/>
+      <Trait id="Politician" value="3"/>
+      <Trait id="Manager" value="4"/>
+      <Trait id="Valor" value="2"/>
+      <Trait id="Honor" value="1"/>
+      <Trait id="Generosity" value="0"/>
+      <Trait id="Mercy" value="0"/>
+      <Trait id="Calculating" value="-2"/></Traits>
+    <Equipments>
+      <EquipmentRoster/>
+      <EquipmentSet id="kinai_bat_template_medium_male"/>
+      <EquipmentSet id="kinai_civ_template_default_male" civilian="true"/>
+    </Equipments>
+  </NPCCharacter>
+  <NPCCharacter id="tk5_mori_shinsuke" name="{=my_tk5_mori_shinsuke}Shinsuke Mori" age="24" voice="curt" default_group="Infantry" is_hero="true" culture="Culture.kinai" occupation="Lord" face_mesh_cache="true">
+    <face>
+      <BodyProperties version="4" age="24.00" weight="0.5" build="0.5" key="001944000E0015C609748F687E35431497F60440966FF2B0A006E02F80A5772800C660030C34C625000000000000000000000000000000000000000027900140"/>
+    </face>
+    <Traits>
+      <Trait id="BalancedFightingSkills" value="5"/><Trait id="Commander" value="9"/>
+      <Trait id="Politician" value="3"/>
+      <Trait id="Manager" value="4"/>
+      <Trait id="Valor" value="2"/>
+      <Trait id="Honor" value="2"/>
+      <Trait id="Generosity" value="-1"/>
+      <Trait id="Mercy" value="1"/>
+      <Trait id="Calculating" value="-3"/></Traits>
+    <Equipments>
+      <EquipmentRoster/>
+      <EquipmentSet id="kinai_bat_template_medium_male"/>
+      <EquipmentSet id="kinai_civ_template_default_male" civilian="true"/>
+    </Equipments>
+  </NPCCharacter>
+  <NPCCharacter id="tk5_yanada_masatsuna" name="{=my_tk5_yanada_masatsuna}Masatsuna Yanada" age="26" voice="curt" default_group="Infantry" is_hero="true" culture="Culture.kinai" occupation="Lord" face_mesh_cache="true">
+    <face>
+      <BodyProperties version="4" age="26.00" weight="0.5" build="0.5" key="001944000E0015C609748F687E35431497F60440966FF2B0A006E02F80A5772800C660030C34C625000000000000000000000000000000000000000027900140"/>
+    </face>
+    <Traits>
+      <Trait id="BalancedFightingSkills" value="5"/><Trait id="Commander" value="14"/>
+      <Trait id="Politician" value="4"/>
+      <Trait id="Manager" value="5"/>
+      <Trait id="Valor" value="2"/>
+      <Trait id="Honor" value="1"/>
+      <Trait id="Generosity" value="0"/>
+      <Trait id="Mercy" value="1"/>
+      <Trait id="Calculating" value="-2"/></Traits>
+    <Equipments>
+      <EquipmentRoster/>
+      <EquipmentSet id="kinai_bat_template_medium_male"/>
+      <EquipmentSet id="kinai_civ_template_default_male" civilian="true"/>
+    </Equipments>
+  </NPCCharacter>
+</NPCCharacters>
