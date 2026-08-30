@@ -31,3 +31,4 @@ ArtSource/api_config.json
 # 成品立绘与头像（1049 人约 350~450 MB，走发布包分发，不进 git）
 GUI/SpriteParts/taikou_portrait_*.png
 GUI/SpriteParts/taikou_avatar_*.png
+ArtSource/
