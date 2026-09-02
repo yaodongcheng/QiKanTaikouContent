@@ -14,7 +14,7 @@ obj/
 # ── 立绘/头像生成流水线（见 LivingWorldNpcs/plans/scenario-campaign-mode/附录-角色立绘生成流水线.md）──
 # 图片一律不进 git：AI 原图 / 抠图中间产物 / 预览图 / 最终成品
 # 保留在 git 里的是「怎么生成」而不是「生成了什么」：
-#   ArtSource/*.py        生成脚本 = 唯一事实源（铁律 22，改画风改脚本重跑）
+#   scripts/            生成脚本 = 唯一事实源（铁律 22，改画风改脚本重跑）—— 2026-09-02 用户裁定：脚本独立成 scripts/，可入库
 #   ArtSource/refs_koei/  光荣参考图存档（视觉特征提炼用）—— 2026-08-28 用户裁定：整目录不进 git（图片多，且参考图不随包分发）
 ArtSource/**/*.png
 ArtSource/**/*.jpg
@@ -32,3 +32,7 @@ ArtSource/api_config.json
 GUI/SpriteParts/taikou_portrait_*.png
 GUI/SpriteParts/taikou_avatar_*.png
 ArtSource/
+
+# ── AssetPackages 全部不入 git（2026-09-02 用户裁定）──
+# 立绘/换脸 tpac 一律走发布包分发；仓库只留「怎么生成」（脚本/配置/CSV）
+AssetPackages/

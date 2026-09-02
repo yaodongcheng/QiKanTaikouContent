@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- 空壳 skins.xml: 触发引擎合并机制。所有改写均在 skins.xslt (对前载模块合并后整库生效) -->
+<skins>
+</skins>

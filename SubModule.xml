@@ -14,17 +14,12 @@
     <!-- 织丰前置：本包是织丰的补充（剧本层），玩家必须装织丰；织丰在前加载（剧本层入口共存需在其后注册） -->
     <DependedModule Id="Shokuho"/>
     <DependedModule Id="LivingWorldNpcs"/>
-    <!-- 06 扮演历史人物依赖 -->
-    <DependedModule Id="StartAsAnyone"/>
   </DependedModules>
   <!-- 启动器专用顺序声明（游戏内加载器不解析此节点，但保留兼容启动器） -->
   <DependedModuleMetadatas>
     <DependedModuleMetadata id="Shokuho" order="LoadBeforeThis"/>
     <DependedModuleMetadata id="LivingWorldNpcs" order="LoadBeforeThis"/>
   </DependedModuleMetadatas>
-  <!-- 兼容层已删除（2026-08-25）：排序声明回到剧本层定位——织丰由 DependedModules 约束在前，
-       剧本层在其后加载实现入口共存（plan 07 部件 4）；无 ModulesToLoadAfterThis。
-       兼容层曾经的"织丰在后"声明（ModulesToLoadAfterThis）与剧本层需求相反，一并移除。 -->
   <SubModules>
     <SubModule>
       <Name value="ShokuhoTaikouExpansionPack"/>
