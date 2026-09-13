@@ -151,7 +151,7 @@ def main():
         print('[dry] 不落盘。')
         return 0
 
-    # ── 7. SpriteData XML（零注释！全子元素！格式规则 = custom-png-import-guide.md）──
+    # ── 7. SpriteData XML（零注释！全子元素！格式规则 = plans/任意png图加载-custom-png-import-guide.md）──
     xml = ['<?xml version="1.0" encoding="utf-8"?>', '<SpriteData>', '  <SpriteCategories>']
     for cat, w, h, items in cat_items:
         xml.append('    <SpriteCategory>')
